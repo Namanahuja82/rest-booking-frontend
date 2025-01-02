@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --accent: #f59e0b;
+  --background: #f3f4f6;
+}
+
+body {
+  background-color: var(--background);
+}
+
+.booking-form-input {
+  @apply w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 bg-gray-50 hover:bg-white;
+}
+
+.form-label {
+  @apply block text-sm font-medium mb-2 text-gray-700;
+}
+
+.booking-card {
+  @apply bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300;
+}
