@@ -3,9 +3,7 @@ import { useState } from 'react';
 import { createBooking } from '@/utils/api';
 import toast from 'react-hot-toast';
 
-const AVAILABLE_TIMES = [
-  '12:00', '13:00', '14:00', '15:00', '18:00', '19:00', '20:00', '21:00'
-];
+const AVAILABLE_TIMES = ['12:00', '13:00', '14:00', '15:00', '18:00', '19:00', '20:00', '21:00'];
 
 export default function BookingForm() {
   const [formData, setFormData] = useState({
@@ -22,29 +20,17 @@ export default function BookingForm() {
     try {
       await createBooking(formData);
       toast.success('Booking created successfully!', {
-        style: {
-          background: '#10B981',
-          color: '#fff'
-        }
+        style: { background: '#10B981', color: '#fff' },
       });
-      setFormData({
-        name: '',
-        email: '',
-        date: '',
-        time: '',
-        guests: 1,
-        phoneNumber: ''
-      });
-    } catch (error: any) {
-      toast.error(error.response?.data?.error || 'Failed to create booking', {
-        style: {
-          background: '#EF4444',
-          color: '#fff'
-        }
-      });
+      setFormData({ name: '', email: '', date: '', time: '', guests: 1, phoneNumber: '' });
+    } catch (error: unknown) {
+      if (error instanceof Error && error.message) {
+        toast.error(error.message, { style: { background: '#EF4444', color: '#fff' } });
+      } else {
+        toast.error('Failed to create booking', { style: { background: '#EF4444', color: '#fff' } });
+      }
     }
   };
-
   return (
     <div className="booking-card">
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Make a Reservation</h2>

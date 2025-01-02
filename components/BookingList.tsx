@@ -21,21 +21,21 @@ export default function BookingList() {
     try {
       const data = await getBookings(selectedDate);
       setBookings(data);
-    } catch (error) {
+    } catch {
       toast.error('Failed to fetch bookings');
     }
   };
 
   useEffect(() => {
-    fetchBookings();
+    fetchBookings(); // Call the function defined outside
   }, [selectedDate]);
 
   const handleDelete = async (id: string) => {
     try {
       await deleteBooking(id);
       toast.success('Booking cancelled successfully');
-      fetchBookings();
-    } catch (error) {
+      fetchBookings(); // Reuse the same fetch function here
+    } catch {
       toast.error('Failed to cancel booking');
     }
   };
